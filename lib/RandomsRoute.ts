@@ -4,9 +4,9 @@ import { initRoute } from './decorators';
 
 export declare namespace Route {
     /* Types */
-    export type Req = Request;
-    export type Res = Response;
-    export type Next = NextFunction;
+    export type { Request}
+    export type { Response }
+    export type { NextFunction }
     
     /* Decorators */
     export { initRoute }

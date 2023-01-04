@@ -4,7 +4,7 @@ import { Route }  from  './lib/RandomsRoute';
 export { useMiddlewares, runServer } from './lib/internals/server';
 
 export default Route;
-export { initRoute } from './lib/decorators';
+export { initRoute, init } from './lib/decorators';
 
 export type {
     Request, Response, NextFunction

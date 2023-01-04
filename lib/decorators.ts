@@ -14,6 +14,14 @@ export function initRoute (middleWares: MiddleWares = []) {
     }
 }
 
+export function init () {
+  return function <T extends { new (...args: any[]): {} }> (constructor: T) {
+    const instance = new constructor () as RouteBase;
+    instance.path = getCallerPath ();
+    createRoute (instance, [],instance.path);
+  }
+}
+
 /**  
     * randoms router decorator
 **/

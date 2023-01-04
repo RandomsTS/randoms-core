@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.initRoute = void 0;
+exports.init = exports.initRoute = void 0;
 const server_1 = require("./internals/server");
 const path_util_1 = require("./util/path-util");
 /*
@@ -14,6 +14,14 @@ function initRoute(middleWares = []) {
     };
 }
 exports.initRoute = initRoute;
+function init() {
+    return function (constructor) {
+        const instance = new constructor();
+        instance.path = (0, path_util_1.getCallerPath)();
+        (0, server_1.createRoute)(instance, [], instance.path);
+    };
+}
+exports.init = init;
 /**
     * randoms router decorator
 **/

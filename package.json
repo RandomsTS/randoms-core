@@ -1,0 +1,26 @@
+{
+  "name": "@randoms/core",
+  "version": "1.2.1",
+  "description": "randoms core modules",
+  "main": "./dist/index.js",
+  "author": "zain-ul-din",
+  "license": "MIT",
+  "private": false,
+  "types": "./index.d.ts",
+  "ts-module": "./index.ts",
+  "scripts": {
+    "dev": "randomsc",
+    "build": "tsc",
+    "test": "tsc && node ./dist/client.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.14"
+  },
+  "bin":{
+    "randomsc":"randoms-generator"
+  }
+}
+

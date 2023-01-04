@@ -46,6 +46,7 @@ function createRoute(routeBase, middleWares, path) {
             throw new Error(`route with ${path} already exists`);
         return;
     }
+    console.log(`initializing route on ${path}`);
     exports.routers[path] = (0, express_1.Router)();
     middleWares.forEach(mw => exports.routers[path].use(mw));
     exports.routers[path].get('/', routeBase.get);

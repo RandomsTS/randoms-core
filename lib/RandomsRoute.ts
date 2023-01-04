@@ -13,6 +13,7 @@ export declare namespace Route {
 }
 
 
+
 /* base class for all routes */
 export abstract class Route extends RouteBase {
     public  async   get     (req: Request, res: Response):  Promise<void> {  res.send (`can't resolve ${this.path}`)  }

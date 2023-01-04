@@ -27,6 +27,8 @@ export function createRoute(routeBase:RouteBase,middleWares:MiddleWares, path: s
         return;
     } 
     
+    console.log (`initializing route on ${path}`);
+    
     routers[path] = Router();
     middleWares.forEach (mw => routers[path].use(mw));
     routers[path].get('/', routeBase.get);

@@ -23,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createRoute = exports.startServer = exports.routers = void 0;
+exports.useMiddlewares = exports.createRoute = exports.runServer = exports.routers = void 0;
 const express_1 = __importStar(require("express"));
 const app = (0, express_1.default)();
 const port = 3000;
@@ -31,12 +31,12 @@ exports.routers = {};
 ///
 /// starts server
 ///
-function startServer() {
+function runServer() {
     app.listen(port, () => {
         console.log(`@randoms server is running on port 3000 http://localhost:3000/`);
     });
 }
-exports.startServer = startServer;
+exports.runServer = runServer;
 ///
 /// create router 
 ///
@@ -55,3 +55,10 @@ function createRoute(routeBase, middleWares, path) {
     app.use(path, exports.routers[path]);
 }
 exports.createRoute = createRoute;
+///
+/// Applys middlewares to each route
+///
+function useMiddlewares(middleWares) {
+    middleWares.forEach(mw => app.use(mw));
+}
+exports.useMiddlewares = useMiddlewares;

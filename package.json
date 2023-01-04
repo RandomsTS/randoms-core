@@ -1,6 +1,6 @@
 {
   "name": "@randoms/core",
-  "version": "1.2.1",
+  "version": "0.1.0",
   "description": "randoms core modules",
   "main": "./dist/index.js",
   "author": "zain-ul-din",

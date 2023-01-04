@@ -1,11 +1,11 @@
 "use strict";
 /* internal */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.initRoute = exports.isValidType = void 0;
-var typechecker_1 = require("./lib/internals/typechecker");
-Object.defineProperty(exports, "isValidType", { enumerable: true, get: function () { return typechecker_1.isValidType; } });
+exports.runServer = exports.useMiddlewares = void 0;
+// export { isValidType } from './lib/internals/typechecker';
 /* Public APIS */
-var decorators_1 = require("./lib/decorators");
-Object.defineProperty(exports, "initRoute", { enumerable: true, get: function () { return decorators_1.initRoute; } });
 const RandomsRoute_1 = require("./lib/RandomsRoute");
+var server_1 = require("./lib/internals/server");
+Object.defineProperty(exports, "useMiddlewares", { enumerable: true, get: function () { return server_1.useMiddlewares; } });
+Object.defineProperty(exports, "runServer", { enumerable: true, get: function () { return server_1.runServer; } });
 exports.default = RandomsRoute_1.Route;

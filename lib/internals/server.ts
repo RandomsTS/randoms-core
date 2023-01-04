@@ -9,7 +9,7 @@ export const routers: {[id:string] : Router} = {};
 ///
 /// starts server
 ///
-export function startServer(): void {
+export function runServer(): void {
     app.listen(port, () => {
         console.log(`@randoms server is running on port 3000 http://localhost:3000/`)
     })

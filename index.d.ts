@@ -1,11 +1,7 @@
-/* internal */
-
-export { isValidType } from './lib/internals/typechecker';
-
 /* Public APIS */
 
-export { initRoute } from './lib/decorators';
 import { Route }  from  './lib/RandomsRoute';
+export { useMiddlewares, runServer } from './lib/internals/server';
 
 export default Route;
 
@@ -13,3 +9,4 @@ export default Route;
 export type {
     Request, Response, NextFunction
 } from 'express';
+

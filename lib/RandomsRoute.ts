@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import RouteBase from './types/RouteBase';
-import { initRoute, foo } from './decorators';
+import { initRoute } from './decorators';
 
 export declare namespace Route {
     /* Types */
@@ -19,6 +19,5 @@ export abstract class Route extends RouteBase {
     public  async   post    (req: Request, res: Response):  Promise<void> {  res.send (`can't resolve ${this.path}`)  }
     public  async   delete  (req: Request, res: Response):  Promise<void> {  res.send (`can't resolve ${this.path}`)  }
 
-    public static fooFunc = foo
-    public static fooTest = initRoute
+    public static init = initRoute
 }

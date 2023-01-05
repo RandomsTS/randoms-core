@@ -14,6 +14,7 @@ export function getCallerPath (): string  {
     const callerPath:string = getCallerFilePath () as '';
     if (callerPath == undefined) throw new Error (`Can't read caller file path`);
     const target = callerPath.replaceAll (process.cwd (), '');
+    console.log (target);
     return target
         .split ('.') [0]
         .replaceAll ("\\", "/")

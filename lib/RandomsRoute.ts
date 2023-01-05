@@ -8,6 +8,7 @@ export declare namespace Route {
     export type { Response }
     export type { NextFunction }
     
+    
 }
 
 
@@ -19,4 +20,5 @@ export abstract class Route extends RouteBase {
     public  async   delete  (req: Request, res: Response):  Promise<void> {  res.send (`can't resolve ${this.path}`)  }
 
     public static fooFunc = foo
+    public static fooTest = initRoute
 }

@@ -8,7 +8,6 @@ export declare namespace Route {
     export type { Response }
     export type { NextFunction }
     
-    
 }
 
 

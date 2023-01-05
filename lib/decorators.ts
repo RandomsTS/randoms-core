@@ -22,6 +22,10 @@ export function init () {
   }
 }
 
+export function foo () {
+  console.log ("foo");
+}
+
 /**  
     * randoms router decorator
 **/

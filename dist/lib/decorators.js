@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.foo = exports.init = exports.initRoute = void 0;
+exports.init = exports.initRoute = void 0;
 const server_1 = require("./internals/server");
 const path_util_1 = require("./util/path-util");
 /*
@@ -22,10 +22,6 @@ function init() {
     };
 }
 exports.init = init;
-function foo() {
-    console.log("foo");
-}
-exports.foo = foo;
 /**
     * randoms router decorator
 **/

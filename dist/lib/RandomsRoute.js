@@ -12,7 +12,6 @@ class Route extends RouteBase_1.default {
     async put(req, res) { res.send(`can't resolve ${this.path}`); }
     async post(req, res) { res.send(`can't resolve ${this.path}`); }
     async delete(req, res) { res.send(`can't resolve ${this.path}`); }
-    static fooFunc = decorators_1.foo;
-    static fooTest = decorators_1.initRoute;
+    static init = decorators_1.initRoute;
 }
 exports.Route = Route;

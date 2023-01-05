@@ -18,8 +18,11 @@ function getCallerPath() {
     const callerPath = getCallerFilePath();
     if (callerPath == undefined)
         throw new Error(`Can't read caller file path`);
-    console.log(callerPath + " , " + process.cwd());
     const target = callerPath.replaceAll(process.cwd(), '');
-    return "/" + target.split('.')[0].replace(/\\.*?\\/, '').replaceAll("\\", "/");
+    console.log(target);
+    return target
+        .split('.')[0]
+        .replaceAll("\\", "/")
+        .replace(/^\/\w+\/\w+\/(.*)$/, '/$1'); // skips starting two dirs
 }
 exports.getCallerPath = getCallerPath;

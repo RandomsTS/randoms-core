@@ -10,8 +10,10 @@ export declare namespace Route {
     
 }
 
-
-
+function foo () {
+    console.log ("foo");
+}
+  
 /* base class for all routes */
 export abstract class Route extends RouteBase {
     public  async   get     (req: Request, res: Response):  Promise<void> {  res.send (`can't resolve ${this.path}`)  }
@@ -19,6 +21,5 @@ export abstract class Route extends RouteBase {
     public  async   post    (req: Request, res: Response):  Promise<void> {  res.send (`can't resolve ${this.path}`)  }
     public  async   delete  (req: Request, res: Response):  Promise<void> {  res.send (`can't resolve ${this.path}`)  }
 
-    public static init = initRoute;
+    public static fooFunc = foo
 }
-

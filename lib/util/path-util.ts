@@ -13,7 +13,6 @@ function getCallerFilePath (): string | undefined
 export function getCallerPath (): string  {
     const callerPath:string = getCallerFilePath () as '';
     if (callerPath == undefined) throw new Error (`Can't read caller file path`);
-    console.log ( callerPath + " , " + process.cwd ());
     const target = callerPath.replaceAll (process.cwd (), '');
     return target
         .split ('.') [0]

@@ -17,11 +17,9 @@
     "express": "^4.18.2"
   },
   "devDependencies": {
-    "@randoms-pkg/code-generator": "^2.3.2",
     "@types/express": "^4.17.15"
   },
   "bin": {
     "randoms": "./bin/randoms"
   }
 }
-

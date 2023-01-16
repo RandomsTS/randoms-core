@@ -1,25 +1,23 @@
-const process = require('child_process');
+const child_process = require('child_child_process');
 const fs = require ('fs');
 const CONST = require ('./constant');
 const file_content = require ("./file_content");
 const code_generator = require ("@randomsts/code-generator");
 
 const start_server = (production = false)=> {
-    const node_buffer = process.exec (`node ./randoms/server.js${production ?? '--env=production'}`);
+    const node_buffer = child_process.exec (`node ./randoms/server.js${production ?? '--env=production'}`);
     console.log (node_buffer);
 }
 
 const create_file = () => fs.writeFileSync ('./randoms/server.js', file_content, "utf8");
 
 const build_files = (production = false)=>{
-    const tsc_buffer = process.exec (`tsc --rootDir ./src --outDir randoms ${production ? '--diagnostics' : '--watch'}`);
+    const tsc_buffer = child_process.exec (`tsc --rootDir ./src --outDir randoms ${production ? '--diagnostics' : '--watch'}`);
     console.log (tsc_buffer);
-    const babel_buffer = process.exec ("babel randoms --out-dir randoms");
+    const babel_buffer = child_process.exec ("babel randoms --out-dir randoms");
     console.log (babel_buffer);
     code_generator.writeToFile ();
 }
-
-console.log (process.argv);
 
 const argu = process.argv [2];
 

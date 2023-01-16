@@ -1,4 +1,4 @@
-module.default = 
+const fileContent = 
 `
 "use strict";
 
@@ -16,3 +16,5 @@ const output_1 = __importDefault(require("./output.js"));
 output_1.default.default.forEach(route => route.default.path);
 (0, core_1.runServer)();
 `    
+
+export default fileContent;

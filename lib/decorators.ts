@@ -3,8 +3,10 @@ import { createRoute } from "./internals/server";
 import { getCallerPath } from "./util/path-util";
 import  type { MiddleWares } from './types/RouteTypes';
 
-/*
-  * init router
+/**
+ * initRoutes and apply router-level middlewares
+ * @param middleWares 
+ * @returns `function <T extends { new (...args: any[]): {} }>`
 */
 export function initRoute (middleWares: MiddleWares = []) {
     return function <T extends { new (...args: any[]): {} }> (constructor: T) {

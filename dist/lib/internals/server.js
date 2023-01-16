@@ -46,7 +46,20 @@ function createRoute(routeBase, middleWares, path) {
             throw new Error(`route with ${path} already exists`);
         return;
     }
+    const pathToArr = path.split('/');
+    const fileName = pathToArr[pathToArr.length - 1];
+    let isDynamicRoute = fileName.startsWith("...") || fileName.startsWith(":");
     console.log(`initializing route on ${path}`);
+    if (isDynamicRoute) {
+        exports.routers[path] = (0, express_1.Router)();
+        middleWares.forEach(mw => exports.routers[path].use(mw));
+        exports.routers[path].get(path, routeBase.get);
+        exports.routers[path].put(path, routeBase.put);
+        exports.routers[path].post(path, routeBase.post);
+        exports.routers[path].delete(path, routeBase.delete);
+        app.use('/', exports.routers[path]);
+        return;
+    }
     exports.routers[path] = (0, express_1.Router)();
     middleWares.forEach(mw => exports.routers[path].use(mw));
     exports.routers[path].get('/', routeBase.get);
@@ -57,7 +70,7 @@ function createRoute(routeBase, middleWares, path) {
 }
 exports.createRoute = createRoute;
 ///
-/// Applys middlewares to each route
+/// Applys middlewares application level middlewars
 ///
 function useMiddlewares(middleWares) {
     middleWares.forEach(mw => app.use(mw));

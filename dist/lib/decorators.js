@@ -3,8 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.initRoute = void 0;
 const server_1 = require("./internals/server");
 const path_util_1 = require("./util/path-util");
-/*
-  * init router
+/**
+ * initRoutes and apply router-level middlewares
+ * @param middleWares
+ * @returns `function <T extends { new (...args: any[]): {} }>`
 */
 function initRoute(middleWares = []) {
     return function (constructor) {

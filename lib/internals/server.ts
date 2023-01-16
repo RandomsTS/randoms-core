@@ -27,8 +27,24 @@ export function createRoute(routeBase:RouteBase,middleWares:MiddleWares, path: s
         return;
     } 
     
-    console.log (`initializing route on ${path}`);
+    const pathToArr: Array<string> = path.split ('/');
+    const fileName: string = pathToArr [pathToArr.length - 1];
+    let isDynamicRoute:boolean = fileName.startsWith ("...") || fileName.startsWith (":");
     
+    console.log (`initializing route on ${path}`);
+
+    if (isDynamicRoute)
+    {
+        routers[path] = Router(); 
+        middleWares.forEach (mw => routers[path].use(mw));
+        routers[path].get(path, routeBase.get);
+        routers[path].put (path, routeBase.put);
+        routers[path].post(path, routeBase.post);
+        routers[path].delete(path, routeBase.delete);
+        app.use ('/', routers [path]);
+        return;
+    }
+
     routers[path] = Router();
     middleWares.forEach (mw => routers[path].use(mw));
     routers[path].get('/', routeBase.get);
@@ -39,7 +55,7 @@ export function createRoute(routeBase:RouteBase,middleWares:MiddleWares, path: s
 }
 
 ///
-/// Applys middlewares to each route
+/// Applys middlewares application level middlewars
 ///
 export function useMiddlewares (middleWares: MiddleWares): void {
     middleWares.forEach (mw => app.use (mw));

@@ -19,9 +19,7 @@ const build_files = (production = false)=>{
     code_generator.writeToFile ();
 }
 
-console.log (process.argu);
-
-const argu = process.argu [2];
+const argu = process.argv [2];
 
 if (argu == '--help' || argu == '-h')
 {

@@ -1,4 +1,4 @@
-const child_process = require('child_child_process');
+const child_process = require('child_process');
 const fs = require ('fs');
 const CONST = require ('./constant');
 const file_content = require ("./file_content");

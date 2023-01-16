@@ -9,7 +9,7 @@ const file_content_1 = __importDefault(require("./file_content"));
 const constant_1 = __importDefault(require("./constant"));
 const fs_1 = __importDefault(require("fs"));
 const start_server = (production = false) => {
-    child_process_1.default.exec(`node ./randoms/server.js${production ?? '--env=production'}`, (err, data) => {
+    child_process_1.default.exec(`node ./randoms/server.js ${production ? '--env=production' : ''}`, (err, data) => {
         if (err)
             console.log(err);
         else

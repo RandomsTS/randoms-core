@@ -6,7 +6,7 @@ import fs from 'fs';
 
 
 const start_server = (production:boolean = false)=> {
-    child_process.exec (`node ./randoms/server.js${production ?? '--env=production'}`, (err, data)=>{
+    child_process.exec (`node ./randoms/server.js ${production ? '--env=production':''}`, (err, data)=>{
         if (err) console.log (err);
         else console.log (data.toString());
     });

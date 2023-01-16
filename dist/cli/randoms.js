@@ -9,15 +9,27 @@ const file_content_1 = __importDefault(require("./file_content"));
 const constant_1 = __importDefault(require("./constant"));
 const fs_1 = __importDefault(require("fs"));
 const start_server = (production = false) => {
-    const node_buffer = child_process_1.default.exec(`node ./randoms/server.js${production ?? '--env=production'}`);
-    console.log(node_buffer);
+    child_process_1.default.exec(`node ./randoms/server.js${production ?? '--env=production'}`, (err, data) => {
+        if (err)
+            console.log(err);
+        else
+            console.log(data.toString());
+    });
 };
 const create_file = () => fs_1.default.writeFileSync('./randoms/server.js', file_content_1.default, "utf8");
 const build_files = (production = false) => {
-    const tsc_buffer = child_process_1.default.exec(`tsc --rootDir ./src --outDir randoms ${production ? '--diagnostics' : '--watch'}`);
-    console.log(tsc_buffer.toString());
-    const babel_buffer = child_process_1.default.exec("babel randoms --out-dir randoms");
-    console.log(babel_buffer.toString());
+    child_process_1.default.exec(`tsc --rootDir ./src --outDir randoms ${production ? '--diagnostics' : '--watch'}`, (err, data) => {
+        if (err)
+            console.log(err);
+        else
+            console.log(data.toString());
+    });
+    child_process_1.default.exec("babel randoms --out-dir randoms", (err, data) => {
+        if (err)
+            console.log(err);
+        else
+            console.log(data.toString());
+    });
     code_generator_1.default.writeToFile();
 };
 const argu = process.argv[2];

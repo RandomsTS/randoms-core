@@ -6,17 +6,23 @@ import fs from 'fs';
 
 
 const start_server = (production:boolean = false)=> {
-    const node_buffer = child_process.exec (`node ./randoms/server.js${production ?? '--env=production'}`);
-    console.log (node_buffer);
+    child_process.exec (`node ./randoms/server.js${production ?? '--env=production'}`, (err, data)=>{
+        if (err) console.log (err);
+        else console.log (data.toString());
+    });
 }
 
 const create_file = () => fs.writeFileSync ('./randoms/server.js', file_content, "utf8");
 
 const build_files = (production:boolean = false)=>{
-    const tsc_buffer = child_process.exec (`tsc --rootDir ./src --outDir randoms ${production ? '--diagnostics' : '--watch'}`);
-    console.log (tsc_buffer.toString ());
-    const babel_buffer = child_process.exec ("babel randoms --out-dir randoms");
-    console.log (babel_buffer.toString ());
+    child_process.exec (`tsc --rootDir ./src --outDir randoms ${production ? '--diagnostics' : '--watch'}`, (err, data)=>{
+        if (err) console.log (err);
+        else console.log (data.toString());
+    });
+    child_process.exec ("babel randoms --out-dir randoms", (err, data)=>{
+        if (err) console.log (err);
+        else console.log (data.toString());
+    });
     codeGenerator.writeToFile ();
 }
 

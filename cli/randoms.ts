@@ -6,11 +6,13 @@ import fs from 'fs';
 
 
 const start_server = (production:boolean = false)=> {
+    generatorSolution ();
     child_process.exec (`node ./randoms/server.js ${production ? '--env=production':''}`, (err, data)=>{
         if (err) console.log (err);
         else console.log (data.toString());
     });
 }
+
 
 
 const create_file = () => {
@@ -27,10 +29,12 @@ const build_files = (production:boolean = false)=>{
     child_process.exec ("babel randoms --out-dir randoms", (err, data)=>{
         if (err) console.log (err);
         else console.log (data.toString());
-        
-        const codeGenerator = new CodeGenerator ();
-        codeGenerator.writeToFile ();
     });
+}
+
+const generatorSolution = () => {
+    const codeGenerator = new CodeGenerator ();
+    codeGenerator.writeToFile ();
 }
 
 const argu = process.argv [2];

@@ -9,6 +9,7 @@ const file_content_1 = __importDefault(require("./file_content"));
 const constant_1 = __importDefault(require("./constant"));
 const fs_1 = __importDefault(require("fs"));
 const start_server = (production = false) => {
+    generatorSolution();
     child_process_1.default.exec(`node ./randoms/server.js ${production ? '--env=production' : ''}`, (err, data) => {
         if (err)
             console.log(err);
@@ -33,9 +34,11 @@ const build_files = (production = false) => {
             console.log(err);
         else
             console.log(data.toString());
-        const codeGenerator = new code_generator_1.default();
-        codeGenerator.writeToFile();
     });
+};
+const generatorSolution = () => {
+    const codeGenerator = new code_generator_1.default();
+    codeGenerator.writeToFile();
 };
 const argu = process.argv[2];
 if (argu == '--help' || argu == '-h') {

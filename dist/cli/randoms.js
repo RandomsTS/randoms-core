@@ -34,7 +34,8 @@ const build_files = (production = false) => {
         else
             console.log(data.toString());
     });
-    code_generator_1.default.writeToFile();
+    const codeGenerator = new code_generator_1.default();
+    codeGenerator.writeToFile();
 };
 const argu = process.argv[2];
 if (argu == '--help' || argu == '-h') {

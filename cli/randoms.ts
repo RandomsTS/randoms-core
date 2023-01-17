@@ -1,5 +1,5 @@
 import child_process from 'child_process';
-import codeGenerator from '@randomsts/code-generator';
+import CodeGenerator from '@randomsts/code-generator';
 import file_content from './file_content';
 import CONST from './constant';
 import fs from 'fs';
@@ -11,6 +11,7 @@ const start_server = (production:boolean = false)=> {
         else console.log (data.toString());
     });
 }
+
 
 const create_file = () => {
     if (!fs.existsSync ("./randoms/server.js"))
@@ -27,6 +28,7 @@ const build_files = (production:boolean = false)=>{
         if (err) console.log (err);
         else console.log (data.toString());
     });
+    const codeGenerator = new CodeGenerator ();
     codeGenerator.writeToFile ();
 }
 

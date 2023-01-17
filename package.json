@@ -14,7 +14,7 @@
     "test": "tsc && node ./dist/client.js"
   },
   "dependencies": {
-    "@randomsts/code-generator": "^2.9.3",
+    "@randomsts/code-generator": "^2.9.5",
     "express": "^4.18.2"
   },
   "devDependencies": {

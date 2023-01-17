@@ -32,7 +32,6 @@ const build_files = (production:boolean = false)=>{
     codeGenerator.writeToFile ();
 }
 
-
 const argu = process.argv [2];
 
 if (argu == '--help' || argu == '-h')

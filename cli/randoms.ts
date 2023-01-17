@@ -12,7 +12,11 @@ const start_server = (production:boolean = false)=> {
     });
 }
 
-const create_file = () => fs.writeFileSync ('./randoms/server.js', file_content, "utf8");
+const create_file = () => {
+    if (!fs.existsSync ("./randoms/server.js"))
+        fs.mkdirSync ("./randoms/server.js", {recursive : true});
+    fs.writeFileSync ('./randoms/server.js', file_content, "utf8");
+}
 
 const build_files = (production:boolean = false)=>{
     child_process.exec (`tsc --rootDir ./src --outDir randoms ${production ? '--diagnostics' : '--watch'}`, (err, data)=>{
@@ -38,8 +42,12 @@ if (argu == '--help' || argu == '-h')
 switch (argu)
 {
     case 'dev':
-        build_files ();
+        child_process.exec (`tsc --rootDir ./src --outDir randoms`, (err, data)=>{
+            if (err) console.log (err);
+            else console.log (data.toString());
+        });
         create_file ();
+        build_files ();
     break;
     case 'run':
         start_server ();

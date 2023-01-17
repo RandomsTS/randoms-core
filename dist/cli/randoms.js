@@ -33,9 +33,9 @@ const build_files = (production = false) => {
             console.log(err);
         else
             console.log(data.toString());
+        const codeGenerator = new code_generator_1.default();
+        codeGenerator.writeToFile();
     });
-    const codeGenerator = new code_generator_1.default();
-    codeGenerator.writeToFile();
 };
 const argu = process.argv[2];
 if (argu == '--help' || argu == '-h') {

@@ -27,9 +27,10 @@ const build_files = (production:boolean = false)=>{
     child_process.exec ("babel randoms --out-dir randoms", (err, data)=>{
         if (err) console.log (err);
         else console.log (data.toString());
+        
+        const codeGenerator = new CodeGenerator ();
+        codeGenerator.writeToFile ();
     });
-    const codeGenerator = new CodeGenerator ();
-    codeGenerator.writeToFile ();
 }
 
 const argu = process.argv [2];

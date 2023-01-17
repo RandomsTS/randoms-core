@@ -14,8 +14,8 @@ const start_server = (production:boolean = false)=> {
 
 
 const create_file = () => {
-    if (!fs.existsSync ("./randoms/server.js"))
-        fs.mkdirSync ("./randoms/server.js", {recursive : true});
+    if (!fs.existsSync ("./randoms/"))
+        fs.mkdirSync ("./randoms/", {recursive : true});
     fs.writeFileSync ('./randoms/server.js', file_content, "utf8");
 }
 

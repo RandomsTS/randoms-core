@@ -17,8 +17,8 @@ const start_server = (production = false) => {
     });
 };
 const create_file = () => {
-    if (!fs_1.default.existsSync("./randoms/server.js"))
-        fs_1.default.mkdirSync("./randoms/server.js", { recursive: true });
+    if (!fs_1.default.existsSync("./randoms/"))
+        fs_1.default.mkdirSync("./randoms/", { recursive: true });
     fs_1.default.writeFileSync('./randoms/server.js', file_content_1.default, "utf8");
 };
 const build_files = (production = false) => {

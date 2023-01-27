@@ -54,6 +54,7 @@ switch (argu) {
         build_files();
         break;
     case 'generate':
+        generatorSolution();
         break;
     case 'run':
         start_server();

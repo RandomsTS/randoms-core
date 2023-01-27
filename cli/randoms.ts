@@ -13,8 +13,6 @@ const start_server = (production:boolean = false)=> {
     });
 }
 
-
-
 const create_file = () => {
     if (!fs.existsSync ("./randoms/"))
         fs.mkdirSync ("./randoms/", {recursive : true});
@@ -54,6 +52,9 @@ switch (argu)
         });
         create_file ();
         build_files ();
+    break;
+    case 'generate':
+
     break;
     case 'run':
         start_server ();

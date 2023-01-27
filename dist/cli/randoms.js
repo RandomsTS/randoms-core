@@ -1,13 +1,10 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const child_process_1 = __importDefault(require("child_process"));
-const code_generator_1 = __importDefault(require("@randomsts/code-generator"));
-const file_content_1 = __importDefault(require("./file_content"));
-const constant_1 = __importDefault(require("./constant"));
-const fs_1 = __importDefault(require("fs"));
+const child_process_1 = require("child_process");
+const code_generator_1 = require("@randomsts/code-generator");
+const file_content_1 = require("./file_content");
+const constant_1 = require("./constant");
+const fs_1 = require("fs");
 const start_server = (production = false) => {
     generatorSolution();
     child_process_1.default.exec(`node ./randoms/server.js ${production ? '--env=production' : ''}`, (err, data) => {
@@ -55,6 +52,8 @@ switch (argu) {
         });
         create_file();
         build_files();
+        break;
+    case 'generate':
         break;
     case 'run':
         start_server();

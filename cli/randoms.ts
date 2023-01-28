@@ -7,16 +7,17 @@ import  CLI           from   './CLI';
 
 class RandomsCLI extends CLI
 {
-    private production: boolean = false;
+    private production: boolean;
 
     public constructor (argument: string)
     {
         super (argument)
+        this.production = false;
     }
 
     private runServer (): void
     {
-        child_process.exec (`node ./randoms/server.js ${this.production ? '--env=production':''}`, (err, data)=>{
+        child_process.exec (`node ./randoms/server.js`, (err, data)=>{
             if (err) console.log (err);
             else console.log (data.toString());
         });
@@ -28,7 +29,7 @@ class RandomsCLI extends CLI
         fs.mkdirSync ("./randoms/", {recursive : true});
         fs.writeFileSync ('./randoms/server.js', file_content, "utf8");
     }
-
+    
     private watchFiles (): void
     {
         child_process.exec (`tsc-watch --rootDir ./src --outDir randoms --onSuccess "randoms generator"`, (err,data)=>{
@@ -55,7 +56,7 @@ class RandomsCLI extends CLI
             process.exit ();
         }
     }
-
+    
     public override emitController () 
     {
         this.help ();
@@ -75,16 +76,16 @@ class RandomsCLI extends CLI
             case 'generate':
                 this.generatorCode ();
             case 'dev':
-                this.production = true;
                 this.runServer ();
             break;
             case 'watch':
                 this.watchFiles ();
+            default:
+                this.help ();    
         }
     }
 }
 
-new RandomsCLI (process.argv [2])
-.emitController ();
+new RandomsCLI (process.argv [2]).emitController ();
 
 

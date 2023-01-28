@@ -10,12 +10,13 @@ const constant_1 = __importDefault(require("./constant"));
 const fs_1 = __importDefault(require("fs"));
 const CLI_1 = __importDefault(require("./CLI"));
 class RandomsCLI extends CLI_1.default {
-    production = false;
+    production;
     constructor(argument) {
         super(argument);
+        this.production = false;
     }
     runServer() {
-        child_process_1.default.exec(`node ./randoms/server.js ${this.production ? '--env=production' : ''}`, (err, data) => {
+        child_process_1.default.exec(`node ./randoms/server.js`, (err, data) => {
             if (err)
                 console.log(err);
             else
@@ -70,13 +71,13 @@ class RandomsCLI extends CLI_1.default {
             case 'generate':
                 this.generatorCode();
             case 'dev':
-                this.production = true;
                 this.runServer();
                 break;
             case 'watch':
                 this.watchFiles();
+            default:
+                this.help();
         }
     }
 }
-new RandomsCLI(process.argv[2])
-    .emitController();
+new RandomsCLI(process.argv[2]).emitController();

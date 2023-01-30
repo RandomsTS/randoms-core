@@ -1,9 +1,9 @@
-import  child_process from   'child_process';
-import  CodeGenerator from   '@randomsts/code-generator';
-import  file_content  from   './file_content';
-import  CONST         from   './constant';
-import  fs            from   'fs';
-import  CLI           from   './CLI';
+import      child_process   from        'child_process';
+import      CodeGenerator   from        '@randomsts/code-generator';
+import      file_content    from        './file_content';
+import      CONST           from        './constant';
+import      fs              from        'fs';
+import      CLI             from        './CLI';
 
 class RandomsCLI extends CLI
 {
@@ -22,7 +22,7 @@ class RandomsCLI extends CLI
             else console.log (data.toString());
         });
     }
-    
+
     private createIndexFile (): void 
     {
         if (!fs.existsSync ("./randoms/"))
@@ -32,7 +32,7 @@ class RandomsCLI extends CLI
     
     private watchFiles (): void
     {
-        child_process.exec (`tsc-watch --rootDir ./src --outDir randoms --onSuccess "randoms start"`, (err,data)=>{
+        child_process.exec (`tsc-watch --rootDir ./src --outDir randoms --onSuccess "randoms generate"`, (err,data)=>{
             if (err) console.log (err);
             else console.log (data.toString());
         });
@@ -72,10 +72,12 @@ class RandomsCLI extends CLI
                 this.createIndexFile ();
             break;
             case 'start':
-                this.createIndexFile ();
-                this.generatorCode ();
                 this.runServer ();
             break;
+            case 'generate':
+                this.createIndexFile ();
+                this.generatorCode ();
+            break;    
             case 'dev':
                 this.runServer ();
             break;

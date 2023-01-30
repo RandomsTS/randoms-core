@@ -32,7 +32,7 @@ class RandomsCLI extends CLI
     
     private watchFiles (): void
     {
-        child_process.exec (`tsc-watch --rootDir ./src --outDir randoms --onSuccess "randoms generator"`, (err,data)=>{
+        child_process.exec (`tsc-watch --rootDir ./src --outDir randoms --onSuccess "randoms generate"`, (err,data)=>{
             if (err) console.log (err);
             else console.log (data.toString());
         });
@@ -62,7 +62,7 @@ class RandomsCLI extends CLI
         this.help ();
         switch (this.argument)
         {
-            case 'dev':
+            case 'dev:build':
                 this.production = true;
                 child_process.exec (`tsc --rootDir ./src --outDir randoms --diagnostics`, (err, data)=>{
                     if (err) console.log (err);
@@ -73,13 +73,16 @@ class RandomsCLI extends CLI
             break;
             case 'start':
                 this.runServer ();
+            break;
             case 'generate':
                 this.generatorCode ();
+            break;
             case 'dev':
                 this.runServer ();
             break;
             case 'watch':
                 this.watchFiles ();
+            break;
             default:
                 this.help ();    
         }

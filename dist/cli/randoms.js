@@ -29,7 +29,7 @@ class RandomsCLI extends CLI_1.default {
         fs_1.default.writeFileSync('./randoms/server.js', file_content_1.default, "utf8");
     }
     watchFiles() {
-        child_process_1.default.exec(`tsc-watch --rootDir ./src --outDir randoms --onSuccess "randoms generator"`, (err, data) => {
+        child_process_1.default.exec(`tsc-watch --rootDir ./src --outDir randoms --onSuccess "randoms generate"`, (err, data) => {
             if (err)
                 console.log(err);
             else
@@ -55,7 +55,7 @@ class RandomsCLI extends CLI_1.default {
     emitController() {
         this.help();
         switch (this.argument) {
-            case 'dev':
+            case 'dev:build':
                 this.production = true;
                 child_process_1.default.exec(`tsc --rootDir ./src --outDir randoms --diagnostics`, (err, data) => {
                     if (err)
@@ -68,13 +68,16 @@ class RandomsCLI extends CLI_1.default {
                 break;
             case 'start':
                 this.runServer();
+                break;
             case 'generate':
                 this.generatorCode();
+                break;
             case 'dev':
                 this.runServer();
                 break;
             case 'watch':
                 this.watchFiles();
+                break;
             default:
                 this.help();
         }

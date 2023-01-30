@@ -22,7 +22,7 @@ class RandomsCLI extends CLI
             else console.log (data.toString());
         });
     }
-
+    
     private createIndexFile (): void 
     {
         if (!fs.existsSync ("./randoms/"))
@@ -32,7 +32,7 @@ class RandomsCLI extends CLI
     
     private watchFiles (): void
     {
-        child_process.exec (`tsc-watch --rootDir ./src --outDir randoms --onSuccess "randoms generate"`, (err,data)=>{
+        child_process.exec (`tsc-watch --rootDir ./src --outDir randoms --onSuccess "randoms start"`, (err,data)=>{
             if (err) console.log (err);
             else console.log (data.toString());
         });
@@ -72,10 +72,9 @@ class RandomsCLI extends CLI
                 this.createIndexFile ();
             break;
             case 'start':
-                this.runServer ();
-            break;
-            case 'generate':
+                this.createIndexFile ();
                 this.generatorCode ();
+                this.runServer ();
             break;
             case 'dev':
                 this.runServer ();
@@ -88,6 +87,7 @@ class RandomsCLI extends CLI
         }
     }
 }
+
 
 new RandomsCLI (process.argv [2]).emitController ();
 

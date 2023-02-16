@@ -1,69 +1,96 @@
-import child_process from 'child_process';
-import CodeGenerator from '@randomsts/code-generator';
-import file_content from './file_content';
-import CONST from './constant';
-import fs from 'fs';
+import      child_process   from        'child_process';
+import      CodeGenerator   from        '@randomsts/code-generator';
+import      file_content    from        './file_content';
+import      CONST           from        './constant';
+import      fs              from        'fs';
+import      CLI             from        './CLI';
 
-
-const start_server = (production:boolean = false)=> {
-    generatorSolution ();
-    child_process.exec (`node ./randoms/server.js ${production ? '--env=production':''}`, (err, data)=>{
-        if (err) console.log (err);
-        else console.log (data.toString());
-    });
-}
-
-
-
-const create_file = () => {
-    if (!fs.existsSync ("./randoms/"))
-        fs.mkdirSync ("./randoms/", {recursive : true});
-    fs.writeFileSync ('./randoms/server.js', file_content, "utf8");
-}
-
-const build_files = (production:boolean = false)=>{
-    child_process.exec (`tsc --rootDir ./src --outDir randoms ${production ? '--diagnostics' : '--watch'}`, (err, data)=>{
-        if (err) console.log (err);
-        else console.log (data.toString());
-    });
-    child_process.exec ("babel randoms --out-dir randoms", (err, data)=>{
-        if (err) console.log (err);
-        else console.log (data.toString());
-    });
-}
-
-const generatorSolution = () => {
-    const codeGenerator = new CodeGenerator ();
-    codeGenerator.writeToFile ();
-}
-
-const argu = process.argv [2];
-
-if (argu == '--help' || argu == '-h')
+class RandomsCLI extends CLI
 {
-    console.log (CONST.helper_text);
-    process.exit ();
-}
+    private production: boolean;
 
-switch (argu)
-{
-    case 'dev':
-        child_process.exec (`tsc --rootDir ./src --outDir randoms`, (err, data)=>{
+    public constructor (argument: string)
+    {
+        super (argument)
+        this.production = false;
+    }
+
+    private runServer (): void
+    {
+        child_process.exec (`node ./randoms/server.js`, (err, data)=>{
             if (err) console.log (err);
             else console.log (data.toString());
         });
-        create_file ();
-        build_files ();
-    break;
-    case 'run':
-        start_server ();
-    break;
-    case 'start':
-        build_files (true);
-        create_file ();
-        start_server ();
-    break;   
-    default:
-        console.log (`Invalid Argument ${argu}`);
-    break;
+    }
+
+    private createIndexFile (): void 
+    {
+        if (!fs.existsSync ("./randoms/"))
+        fs.mkdirSync ("./randoms/", {recursive : true});
+        fs.writeFileSync ('./randoms/server.js', file_content, "utf8");
+    }
+    
+    private watchFiles (): void
+    {
+        child_process.exec (`tsc-watch --rootDir ./src --outDir randoms --onSuccess "randoms generate"`, (err,data)=>{
+            if (err) console.log (err);
+            else console.log (data.toString());
+        });
+        child_process.exec ("babel randoms --out-dir randoms", (err, data)=>{
+            if (err) console.log (err);
+            else console.log (data.toString());
+        });
+    }
+
+    private generatorCode (): void  
+    {
+        const codeGenerator = new CodeGenerator ();
+        codeGenerator.writeToFile ();
+    }
+
+    public override help(): void 
+    {
+        if (this.argument == '--help' || this.argument == '-h')
+        {
+            console.log (CONST.helper_text);
+            process.exit ();
+        }
+    }
+    
+    public override emitController () 
+    {
+        this.help ();
+        switch (this.argument)
+        {
+            case 'dev:build':
+                this.production = true;
+                child_process.exec (`tsc --rootDir ./src --outDir randoms --diagnostics`, (err, data)=>{
+                    if (err) console.log (err);
+                    else console.log (data.toString());
+                });
+                this.generatorCode ();
+                this.createIndexFile ();
+            break;
+            case 'start':
+                this.runServer ();
+            break;
+            case 'generate':
+                this.createIndexFile ();
+                this.generatorCode ();
+            break;    
+            case 'dev':
+                this.runServer ();
+            break;
+            case 'watch':
+                this.watchFiles ();
+            break;
+            default:
+                this.help ();    
+        }
+    }
 }
+
+
+new RandomsCLI (process.argv [2]).emitController ();
+
+

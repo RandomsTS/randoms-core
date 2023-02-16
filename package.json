@@ -11,10 +11,11 @@
   "scripts": {
     "dev": "randomsc",
     "build": "tsc",
-    "test": "tsc && node ./dist/client.js"
+    "test": "tsc && node ./dist/client.js",
+    "test:code-generator": "node ./dist/test/code-generator.test.js"
   },
   "dependencies": {
-    "@randomsts/code-generator": "^2.9.6",
+    "@randomsts/code-generator": "^2.9.11",
     "express": "^4.18.2"
   },
   "devDependencies": {

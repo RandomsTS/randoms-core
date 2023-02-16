@@ -14,15 +14,20 @@ class RandomsCLI extends CLI
         super (argument)
         this.production = false;
     }
-
+    
     private runServer (): void
     {
+        if (!this.production)
+        {
+            child_process.exec (`nodemon --exec "node ./randoms/server.js" -e js`);
+            return;
+        }
         child_process.exec (`node ./randoms/server.js`, (err, data)=>{
             if (err) console.log (err);
             else console.log (data.toString());
         });
     }
-
+    
     private createIndexFile (): void 
     {
         if (!fs.existsSync ("./randoms/"))
@@ -62,7 +67,7 @@ class RandomsCLI extends CLI
         this.help ();
         switch (this.argument)
         {
-            case 'dev:build':
+            case 'build':
                 this.production = true;
                 child_process.exec (`tsc --rootDir ./src --outDir randoms --diagnostics`, (err, data)=>{
                     if (err) console.log (err);
@@ -72,6 +77,7 @@ class RandomsCLI extends CLI
                 this.createIndexFile ();
             break;
             case 'start':
+                this.production = true;
                 this.runServer ();
             break;
             case 'generate':
@@ -89,7 +95,6 @@ class RandomsCLI extends CLI
         }
     }
 }
-
 
 new RandomsCLI (process.argv [2]).emitController ();
 
